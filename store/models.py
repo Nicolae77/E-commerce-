@@ -12,7 +12,7 @@ class Product(models.Model):
     stock        = models.IntegerField()
     is_available = models.BooleanField(default=True)
     category     = models.ForeignKey(Category, on_delete=models.CASCADE)
-    create_date  = models.DateTimeField(auto_now_add=True)
+    created_date  = models.DateTimeField(auto_now_add=True)
     modified_date= models.DateTimeField(auto_now=True)
 
     def get_url(self):
@@ -20,6 +20,13 @@ class Product(models.Model):
 
     def __srt__(self):
         return self.product_name
+
+class VariationManager(models.Manager):
+    def colors(self):
+        return super(VariationManager, self).filter(variation_category='color', is_active=True)
+
+    def sizes(self):
+        return super(VariationManager, self).filter(variation_category='size', is_active=True)
 
 variation_category_choice = (
  ('color', 'color'),
@@ -33,5 +40,7 @@ class Variation(models.Model):
     is_active = models.BooleanField(default=True)
     create_date = models.DateTimeField(auto_now=True)
 
-    def __unicode__(self):
-        return self.product
+    objects = VariationManager()
+
+    def __str__(self):
+        return self.variation_value
