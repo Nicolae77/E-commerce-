@@ -5,7 +5,7 @@ from django.contrib import messages, auth
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 #verification Email
-from django.contrib.sites. shortcuts import get_current_site
+from django.contrib.sites.shortcuts import get_current_site
 from django.template.loader import render_to_string
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.encoding import force_bytes
@@ -22,7 +22,7 @@ def register(request):
             email = form.cleaned_data['email']
             password = form.cleaned_data['password']
             username = email.split("@")[0]
-            user = Account.object.create_user(first_name=first_name, last_name=last_name, email=email, username=username, password=password)
+            user = Account.objects.create_user(first_name=first_name, last_name=last_name, email=email, username=username, password=password)
             user.phone_number = phone_number
             user.save()
 
@@ -60,7 +60,7 @@ def login(request):
             # messages.success(request, "You are now loged in.")
             return redirect('dashboard')
         else:
-            messages.error(request, "Invalid login  credentials.")
+            messages.error(request, "Invalid login credentials.")
             return redirect('login')
     return render(request, 'accounts/login.html')
 
@@ -93,8 +93,8 @@ def dashboard(request):
 def forgotPassword(request):
     if request.method == 'POST':
         email = request.POST['email']
-        if Account.object.filter(email=email).exists():
-            user = Account.object.get(email__exact=email)
+        if Account.objects.filter(email=email).exists():
+            user = Account.objects.get(email__exact=email)
 
             current_site = get_current_site(request)
             mail_subject = 'Reset Your Password.'
@@ -110,7 +110,6 @@ def forgotPassword(request):
 
             messages.success(request, 'Password reset has been sent to your email address')
             return redirect('login')
-
         else:
             messages.error(request, 'Account does not exists')
             return redirect('forgotPassword')
@@ -138,8 +137,9 @@ def resetPassword(request):
 
         if password == confirm_password:
             uid = request.session.get('uid')
-            user = Account.object.get(pk=uid)
+            user = Account.objects.get(pk=uid)
             user.set_password(password)
+            user.save()
             messages.success(request, 'Password reset successful')
             return redirect('login')
         else:

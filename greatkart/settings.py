@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 
 from pathlib import Path
 
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -146,7 +147,12 @@ MESSAGE_TAGS = {
 # SMTP Configuration
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_HOST_USER = 'nicolaecaldarasan1983@gmail.com'
-EMAIL_HOST_PASSWORD = 'Caldarasan$£2022'
+EMAIL_PORT = '587'
+EMAIL_HOST_USER = 'bogdancaldarasan787@gmail.com'
+EMAIL_HOST_PASSWORD = '132435465798645314'
 EMAIL_USE_TLS = True
+# EMAIL_HOST = 'smtp.mailgun.org'
+# EMAIL_PORT = '587'
+# EMAIL_USE_TLS = True
+# EMAIL_HOST_USER = 'postmaster@mail.tashamilbo.com'
+# EMAIL_HOST_PASSWORD = '8d1415f60d02dadd798d3e9be81e955d-100b5c8d-46a4a737'
