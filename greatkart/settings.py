@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'accounts',
     'store',
     'carts',
+    'orders',
 ]
 
 MIDDLEWARE = [
@@ -151,8 +152,3 @@ EMAIL_PORT = '587'
 EMAIL_HOST_USER = 'bogdancaldarasan787@gmail.com'
 EMAIL_HOST_PASSWORD = '132435465798645314'
 EMAIL_USE_TLS = True
-# EMAIL_HOST = 'smtp.mailgun.org'
-# EMAIL_PORT = '587'
-# EMAIL_USE_TLS = True
-# EMAIL_HOST_USER = 'postmaster@mail.tashamilbo.com'
-# EMAIL_HOST_PASSWORD = '8d1415f60d02dadd798d3e9be81e955d-100b5c8d-46a4a737'
