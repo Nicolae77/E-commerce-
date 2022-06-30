@@ -71,6 +71,7 @@
    <form action="{% url 'submit_review' single_product.id %}" method='POST'>
     {% csrf_token %}
 		<h5>Write Your Review</h5>
+		{{single_product.averageReview}}
 		<div>
      <label for="">How do you rate this Product?</label>
 		 <br>
@@ -94,11 +95,12 @@
 			<textarea name="review" rows="4" class="form-control"></textarea>
 			<br>
 			{% if user.is_authenticated %}
-			   {% if orderproduct %}
-			   <input type="submit" value='Submit Review' class="btn btn-secondary">
-				   {% else %}
+			<input type="submit" value='Submit Review' class="btn btn-secondary">
+			   <!-- {% if orderproduct %} -->
+
+				   <!-- {% else %}
 				      <p>You must purchase this product to post a review.</p>
-				{% endif %}
+				{% endif %} -->
       {% else %}
       <p>You must be logged in to post a review <span><a href="{% url 'login' %}">Login Now</a></span></p>
 			{% endif %}
@@ -117,7 +119,7 @@
 			<div class="text">
 				<span class="date text-muted float-md-right">{{review.updated_at}} </span>
 				<h6 class="mb-1">{{review.user.full_name}}</h6>
-         <div>
+         <div class="rating-star">
          	<span>
          		<i class="fa fa-star{% if review.rating == 0.5 %}-half-o{% elif review.rating < 1%}-o {% endif %}" aria-hidden="true"></i>
 						<i class="fa fa-star{% if review.rating == 1.5 %}-half-o{% elif review.rating < 2%}-o {% endif %}" aria-hidden="true"></i>
